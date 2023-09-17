@@ -1,0 +1,42 @@
+.input {
+    display: block;
+    padding: 28px 16px 10px;
+    background-color: var(--color-D10);
+    border: 1px solid transparent;
+    border-radius: 12px;
+    position: relative;
+    transition: all 0.2s;
+    cursor: text;
+}
+
+.input:hover {
+    border-color: var(--color-D20);
+}
+
+
+
+.input span {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+    font-size: 12px;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.input p {
+    font-size: 16px;
+    line-height: 16px;
+    pointer-events: none;
+
+}
+
+.input input {
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+}
+
+.input input:focus {
+    outline: none;
+}

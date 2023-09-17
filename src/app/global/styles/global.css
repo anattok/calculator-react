@@ -1,0 +1,41 @@
+@import 'variables.css';
+
+.container {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 1024px;
+    margin: 0 auto;
+}
+
+body {
+    background-color: #f6f5f4;
+    font-family: 'Roboto', sans-serif;
+
+}
+
+ul>li {
+    list-style-type: none;
+}
+
+.form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    display: flex;
+}
+
+.wrapper {
+    flex-grow: 1;
+}
+
+h1 {
+    text-align: left;
+    font-size: 50px;
+    line-height: 52px;
+    margin: 40px 0;
+    color: var(--color-D80);
+}
