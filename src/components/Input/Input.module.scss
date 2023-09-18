@@ -7,36 +7,70 @@
     position: relative;
     transition: all 0.2s;
     cursor: text;
+
+    &:hover {
+        border-color: var(--color-D20);
+    }
+
+    & span {
+        position: absolute;
+        top: 8px;
+        left: 16px;
+        font-size: 12px;
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    & p {
+        font-size: 16px;
+        line-height: 16px;
+        pointer-events: none;
+
+    }
+
+    & input {
+        border: none;
+        background-color: transparent;
+        font-size: 16px;
+        line-height: 16px;
+    }
+
+    & input:focus {
+        outline: none;
+    }
+
+    & p {
+        font-size: 16px;
+        line-height: 16px;
+    }
 }
 
-.input:hover {
-    border-color: var(--color-D20);
-}
 
-
-
-.input span {
+.list {
     position: absolute;
-    top: 8px;
-    left: 16px;
-    font-size: 12px;
-    opacity: 0.5;
-    pointer-events: none;
-}
+    width: 100%;
+    top: 60px;
+    left: 0px;
+    padding: 8px;
+    border-radius: 12px;
+    background-color: var(--color-L100);
+    box-shadow: 0 12px 16px rgba(0, 0, 0, .06);
+    transition: all 0.2s;
+    z-index: 10;
 
-.input p {
-    font-size: 16px;
-    line-height: 16px;
-    pointer-events: none;
+    & li {
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+    }
 
-}
+    & li:first-child {
+        background-color: var(--color-D10);
 
-.input input {
-    border: none;
-    background-color: transparent;
-    font-size: 16px;
-}
+    }
 
-.input input:focus {
-    outline: none;
+    & li:hover {
+        background-color: var(--color-D10);
+    }
 }
