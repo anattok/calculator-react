@@ -7,7 +7,7 @@
 }
 
 .container {
-    width: 1024px;
+    max-width: 1024px;
     margin: 0 auto;
 }
 
@@ -42,11 +42,10 @@ h1 {
 
 .wrapper__top {
     display: grid;
-    /* grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 60px);
     grid-column-gap: 8px;
-    grid-row-gap: 16px; */
-    gap: 10px;
+    grid-row-gap: 16px;
 }
 
 
@@ -76,7 +75,7 @@ h1 {
     grid-area: 4 / 1 / 4 / 3;
 }
 
-.option-monthly .start-data {
+.option-monthly .start-date {
     grid-area: 4 / 3 / 4 / 5;
 }
 
@@ -116,7 +115,7 @@ h1 {
     grid-area: 3 / 1 / 3 / 3;
 }
 
-.option-term .start-data {
+.option-term .start-date {
     grid-area: 3 / 3 / 3 / 5;
 }
 
@@ -152,6 +151,6 @@ h1 {
     display: none;
 }
 
-.option-maximum .start-data {
+.option-maximum .start-date {
     grid-area: 4 / 3 / 4 / 5;
 }
