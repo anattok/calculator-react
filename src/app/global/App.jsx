@@ -101,8 +101,8 @@ function App() {
                   />
                   <Input
                     className="credit-term-list-small"
-                    list={setTypeTerm}
-                    typeCalc={setTypeCalc}
+                    list={termOptions}
+                    setFunction={setTypeTerm}
                   />
                   <Input
                     className="count-procent-small"
@@ -133,6 +133,17 @@ function App() {
                     label="Ежемесячный платеж"
                     initValue="20000"
                     type="text"
+                  />
+                  <Input
+                    className="count-procent-small-term"
+                    label="Ставка"
+                    initValue="10"
+                    type="text"
+                  />
+                  <Input
+                    className="start-date-small-term"
+                    label="Начало выплат"
+                    type="date"
                   />
                 </>
               )}

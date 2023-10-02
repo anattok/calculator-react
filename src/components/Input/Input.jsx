@@ -10,6 +10,7 @@ export const Input = ({
   setFunction,
 }) => {
   const [inputValue, setInputValue] = useState(initValue);
+
   const [selectedItem, setSelectedItem] = useState(list && list[0].text);
 
   const [listOpen, isListOpen] = useState(false); // открытие/закрытие списка
@@ -36,11 +37,15 @@ export const Input = ({
   const inputClassNames = [s.input, className].join(" ");
 
   useEffect(() => {
-    console.log(selectedItem);
-  }, [selectedItem]);
+    console.log(list && list[0].text);
+  }, [list]);
 
   return (
-    <label className={inputClassNames} onClick={() => isListOpen(!listOpen)}>
+    <label
+      style={label ? { padding: "28px 16px 10px" } : { padding: "22px 16px" }}
+      className={inputClassNames}
+      onClick={() => isListOpen(!listOpen)}
+    >
       {label && <span>{label}</span>}
       {list ? (
         <>
