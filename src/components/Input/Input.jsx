@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import s from "./Input.module.scss";
 
 export const Input = ({
@@ -12,6 +12,22 @@ export const Input = ({
   const [listOpen, isListOpen] = useState(false); // открытие/закрытие списка
   const [inputValue, setInputValue] = useState(initValue);
   const [selectedItem, setSelectedItem] = useState(list && list[0].text);
+
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (inputRef.current && !inputRef.current.contains(event.target)) {
+        isListOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   // Проверяем, что list существует и является массивом
   const renderedList =
@@ -40,6 +56,7 @@ export const Input = ({
 
   return (
     <label
+      ref={inputRef}
       style={label ? { padding: "28px 16px 10px" } : { padding: "22px 16px" }}
       className={inputClassNames}
       onClick={() => isListOpen(!listOpen)}

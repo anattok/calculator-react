@@ -84,23 +84,59 @@ function App() {
                     label="Начало выплат"
                     type="date"
                   />
-                  <div className="radio-wrapper ">
-                    <RadioButton
-                      id="annuity"
-                      name="typeCredit"
-                      value="annuity"
-                      text="Аннуитетный"
-                      checked={selectedOption === "annuity"}
-                      onChange={handleOptionChange}
-                    />
-                    <RadioButton
-                      id="differentiated"
-                      name="typeCredit"
-                      value="differentiated"
-                      text="Дифференцированый"
-                      checked={selectedOption === "differentiated"}
-                      onChange={handleOptionChange}
-                    />
+                  <div className="wrapper-bottom">
+                    <div className="question">
+                      Тип платежей{" "}
+                      <span
+                        data-qa="Icon"
+                        class="_17sy1wp _18zu2v3 _g18kgu shape-round"
+                        tabindex="0"
+                      >
+                        <svg
+                          data-qa="Tooltip"
+                          viewBox="0 0 20 20"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M10 17.25A7.25 7.25 0 0 1 2.75 10 7.25 7.25 0 0 1 10 2.75 7.25 7.25 0 0 1 17.25 10 7.25 7.25 0 0 1 10 17.25Z"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          ></path>
+                          <path
+                            d="M10 11.042v-.209c0-.68.42-1.05.842-1.333.412-.277.825-.64.825-1.306a1.666 1.666 0 1 0-3.334 0"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          ></path>
+                          <path
+                            d="M9.997 13a.75.75 0 1 0 .007 1.5.75.75 0 0 0-.007-1.5Z"
+                            fill="currentColor"
+                          ></path>
+                        </svg>
+                      </span>
+                    </div>
+                    <div className="radio-wrapper ">
+                      <RadioButton
+                        id="annuity"
+                        name="typeCredit"
+                        value="annuity"
+                        text="Аннуитетный"
+                        checked={selectedOption === "annuity"}
+                        onChange={handleOptionChange}
+                      />
+                      <RadioButton
+                        id="differentiated"
+                        name="typeCredit"
+                        value="differentiated"
+                        text="Дифференцированый"
+                        checked={selectedOption === "differentiated"}
+                        onChange={handleOptionChange}
+                      />
+                    </div>
                   </div>
                 </>
               )}
@@ -169,7 +205,6 @@ function App() {
                 </>
               )}
             </div>
-            <div className="wrapper__bottom"></div>
           </div>
           <div className="calculation"></div>
         </form>

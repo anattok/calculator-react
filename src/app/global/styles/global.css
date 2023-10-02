@@ -30,7 +30,7 @@ ul>li {
 }
 
 .wrapper {
-    flex-grow: 1;
+    display: flex;
 }
 
 h1 {
@@ -50,7 +50,7 @@ h1 {
     grid-row-gap: 16px;
 }
 
-
+/* TODO: сделать грид сетку нормальной ширины */
 .calculation-option {
     grid-area: 1 / 1 / 1 / 5;
 }
@@ -99,8 +99,34 @@ h1 {
     grid-area: 3 / 3 / 3 / 5;
 }
 
-.radio-wrapper {
+.wrapper-bottom {
     grid-area: 5 / 1 / 5 / 5;
+}
+
+.question {
+    height: 20px;
+    display: flex;
+    align-items: center;
+
+}
+
+.question span {
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+}
+
+.question svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* TODO: сделать подсказку на ховере */
+/* .question:hover{
+
+} */
+
+.radio-wrapper {
     display: flex;
     align-items: center;
     background-color: var(--color-D10);
