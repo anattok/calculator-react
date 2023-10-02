@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
 import "./styles/global.css";
 import { Input } from "../../components/Input/Input";
+import { RadioButton } from "../../components/RadioButton/RadioButton";
 import { Container } from "../../layout/Container/Container";
 
 function App() {
   const [typeCalc, setTypeCalc] = useState("monthly-payment");
-  const [typeTerm, setTypeTerm] = useState("year");
+  const [selectedOption, setSelectedOption] = useState("annuity");
+
+  const handleOptionChange = (e) => {
+    setSelectedOption(e.target.value);
+  };
+
   const variantsOptions = [
     {
       value: "monthly-payment",
@@ -66,7 +72,6 @@ function App() {
                   <Input
                     className="credit-term-list-small"
                     list={termOptions}
-                    setFunction={setTypeTerm}
                   />
                   <Input
                     className="count-procent-small"
@@ -77,9 +82,26 @@ function App() {
                   <Input
                     className="start-date-small"
                     label="Начало выплат"
-                    initValue="5"
-                    type="text"
+                    type="date"
                   />
+                  <div className="radio-wrapper ">
+                    <RadioButton
+                      id="annuity"
+                      name="typeCredit"
+                      value="annuity"
+                      text="Аннуитетный"
+                      checked={selectedOption === "annuity"}
+                      onChange={handleOptionChange}
+                    />
+                    <RadioButton
+                      id="differentiated"
+                      name="typeCredit"
+                      value="differentiated"
+                      text="Дифференцированый"
+                      checked={selectedOption === "differentiated"}
+                      onChange={handleOptionChange}
+                    />
+                  </div>
                 </>
               )}
 
@@ -102,7 +124,6 @@ function App() {
                   <Input
                     className="credit-term-list-small"
                     list={termOptions}
-                    setFunction={setTypeTerm}
                   />
                   <Input
                     className="count-procent-small"

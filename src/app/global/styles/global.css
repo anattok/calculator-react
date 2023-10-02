@@ -4,6 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    transition: all 0.3s;
 }
 
 .container {
@@ -44,7 +45,7 @@ h1 {
 .wrapper__top {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
     grid-column-gap: 8px;
     grid-row-gap: 16px;
 }
@@ -96,4 +97,21 @@ h1 {
 
 .start-date-small-term {
     grid-area: 3 / 3 / 3 / 5;
+}
+
+.radio-wrapper {
+    grid-area: 5 / 1 / 5 / 5;
+    display: flex;
+    align-items: center;
+    background-color: var(--color-D10);
+    padding: 4px;
+    border-radius: 12px;
+    position: relative;
+    height: 44px;
+}
+
+.radio-wrapper label input:checked+span {
+    background-color: var(--color-L100);
+    border-radius: 8px;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, .02), 0 10px 14px rgba(20, 36, 56, .06);
 }

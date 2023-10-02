@@ -9,11 +9,9 @@ export const Input = ({
   className,
   setFunction,
 }) => {
-  const [inputValue, setInputValue] = useState(initValue);
-
-  const [selectedItem, setSelectedItem] = useState(list && list[0].text);
-
   const [listOpen, isListOpen] = useState(false); // открытие/закрытие списка
+  const [inputValue, setInputValue] = useState(initValue);
+  const [selectedItem, setSelectedItem] = useState(list && list[0].text);
 
   // Проверяем, что list существует и является массивом
   const renderedList =
@@ -25,7 +23,7 @@ export const Input = ({
             key={index}
             onClick={() => {
               setSelectedItem(item.text);
-              setFunction(item.value);
+              setFunction && setFunction(item.value);
             }}
           >
             {item.text}
