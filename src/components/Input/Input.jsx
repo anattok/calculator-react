@@ -1,47 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import s from "./Input.module.scss";
 
 export const Input = ({
   label,
   list,
-  initialValue,
+  initValue,
   type,
   className,
-  typeChange,
+  setFunction,
 }) => {
-  const [inputValue, setInputValue] = useState(initialValue); // initialValue из пропсов для установки начального значения состояния
-  const [isListOpen, setIsListOpen] = useState(false); // Состояние для открытия/закрытия списка list
-  const [selectedItem, setSelectedItem] = useState(null); // Состояние для хранения выбранного элемента из списка list
-  const [selectedTypeCalculation, setSelectedTypeCalculation] =
-    useState("monthly-payment"); // Тип выбраннго рассчета платежа
+  const [inputValue, setInputValue] = useState(initValue);
+  const [selectedItem, setSelectedItem] = useState(list && list[0].text);
 
-  // Обновяление значения input value
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
-  };
-
-  // Меняем значение isListOpen при каждом клике
-  const toggleList = () => {
-    setIsListOpen(!isListOpen);
-  };
-
-  //  Выбираем значение из выпадаюцего списка и закрываем список
-  const handleItemClick = (item, type) => {
-    setSelectedItem(item);
-    setIsListOpen(false);
-    setSelectedTypeCalculation(type);
-    typeChange(selectedTypeCalculation);
-  };
+  const [listOpen, isListOpen] = useState(false); // открытие/закрытие списка
 
   // Проверяем, что list существует и является массивом
   const renderedList =
-    isListOpen && list && Array.isArray(list) ? (
+    listOpen && list && Array.isArray(list) ? (
       <ul className={s.list}>
         {list.map((item, index) => (
           <li
             data-variant={item.value}
             key={index}
-            onClick={() => handleItemClick(item, item.value)}
+            onClick={() => {
+              setSelectedItem(item.text);
+              setFunction(item.value);
+            }}
           >
             {item.text}
           </li>
@@ -49,21 +33,25 @@ export const Input = ({
       </ul>
     ) : null;
 
-  const inputClassNames = [s.input, className].join(" "); // Объединяем классы в строку если приходят доп.класс через пропс
+  const inputClassNames = [s.input, className].join(" ");
+
+  useEffect(() => {
+    console.log(selectedItem);
+  }, [selectedItem]);
 
   return (
-    <label className={inputClassNames} onClick={toggleList}>
+    <label className={inputClassNames} onClick={() => isListOpen(!listOpen)}>
       {label && <span>{label}</span>}
       {list ? (
         <>
-          <p>{selectedItem ? selectedItem.text : list[0].text}</p>
+          <p>{selectedItem}</p>
           {renderedList}
         </>
       ) : (
         <input
           type={type === "date" ? "date" : type}
           value={inputValue}
-          onChange={handleInputChange}
+          onChange={(event) => setInputValue(event.target.value)}
         />
       )}
     </label>

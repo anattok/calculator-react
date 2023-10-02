@@ -40,18 +40,59 @@ h1 {
     color: var(--color-D80);
 }
 
+
 .wrapper__top {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 60px);
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, 1fr);
     grid-column-gap: 8px;
     grid-row-gap: 16px;
 }
 
 
+.calculation-option {
+    grid-area: 1 / 1 / 1 / 5;
+}
+
+.sum-credit {
+    grid-area: 2 / 1 / 2 / 5;
+}
+
+.sum-credit-small {
+    grid-area: 2 / 3 / 2 / 5;
+}
+
+.monthly-payment {
+    grid-area: 2 / 1 / 2 / 5;
+}
+
+.monthly-payment-small {
+    grid-area: 2 / 3 / 2 / 5;
+}
+
+.credit-term {
+    grid-area: 2 / 1 / 2 / 3;
+}
+
+.credit-term-small {
+    grid-area: 3 / 1 / 3 / 3;
+}
+
+.credit-term-list-small {
+    grid-area: 3 / 3 / 3 / 5;
+}
+
+.count-procent-small {
+    grid-area: 4 / 1 / 4 / 3;
+}
+
+.start-date-small {
+    grid-area: 4 / 3 / 4 / 5;
+}
+
 
 /*---------------option-monthly----------------------*/
-.option-monthly {
+/* .option-monthly {
     grid-template-rows: repeat(4, 60px);
 }
 
@@ -68,7 +109,7 @@ h1 {
 }
 
 .option-monthly .monthly-payment {
-    display: none;
+    grid-area: 2 / 1 / 3 / 5;
 }
 
 .option-monthly .count-procent {
@@ -84,10 +125,10 @@ h1 {
     padding: 0px 16px;
     display: flex;
     align-items: center;
-}
+} */
 
 /*---------------.option-term----------------------*/
-.option-term {
+/* .option-term {
     grid-template-rows: repeat(3, 60px);
 }
 
@@ -117,10 +158,10 @@ h1 {
 
 .option-term .start-date {
     grid-area: 3 / 3 / 3 / 5;
-}
+} */
 
 /*---------------option-maximum----------------------*/
-.option-maximum {
+/* .option-maximum {
     grid-template-rows: repeat(4, 60px);
 }
 
@@ -153,4 +194,4 @@ h1 {
 
 .option-maximum .start-date {
     grid-area: 4 / 3 / 4 / 5;
-}
+} */
