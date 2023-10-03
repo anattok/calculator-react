@@ -3,8 +3,18 @@
     height: 36px;
     position: relative;
     cursor: pointer;
+    border: 1px solid transparent;
 
+    & input:checked+span {
+        background-color: var(--color-L100);
+        border-radius: 8px;
+        box-shadow: 0 -2px 6px rgba(0, 0, 0, .02), 0 10px 14px rgba(20, 36, 56, .06);
+    }
+
+    // TODO: СДЕЛАТЬ ПРИ ХОВЕРЕ БОРДЕР У РАДИОКНОПКИК КОТОРАЯ НЕ CHEKED
 }
+
+
 
 .input {
     position: absolute;
@@ -20,5 +30,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+
 
 }

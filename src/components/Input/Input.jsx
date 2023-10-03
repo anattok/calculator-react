@@ -12,9 +12,10 @@ export const Input = ({
   const [listOpen, isListOpen] = useState(false); // открытие/закрытие списка
   const [inputValue, setInputValue] = useState(initValue);
   const [selectedItem, setSelectedItem] = useState(list && list[0].text);
-
+  const inputClassNames = [s.input, className].join(" ");
   const inputRef = useRef(null);
 
+  //закрываем список по клику вне списка
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (inputRef.current && !inputRef.current.contains(event.target)) {
@@ -47,8 +48,6 @@ export const Input = ({
         ))}
       </ul>
     ) : null;
-
-  const inputClassNames = [s.input, className].join(" ");
 
   useEffect(() => {
     console.log(list && list[0].text);

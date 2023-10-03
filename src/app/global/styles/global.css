@@ -27,11 +27,48 @@ ul>li {
     padding: 30px;
     border-radius: 12px;
     display: flex;
+    gap: 10px;
 }
 
 .wrapper {
-    display: flex;
+    width: 60%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 8px;
+    grid-row-gap: 16px;
 }
+
+.calculation {
+    width: 40%;
+    height: 100%;
+    border-radius: 20px;
+    border: 1px solid var(--color-D10);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.calculation__picture {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 20px;
+
+}
+
+.calculation__picture-text {
+    margin-top: 20px;
+    font-size: 13px;
+    line-height: 16px;
+    text-align: center;
+    color: var(--color-D60);
+    opacity: 0.9;
+}
+
 
 h1 {
     text-align: left;
@@ -41,14 +78,6 @@ h1 {
     color: var(--color-D80);
 }
 
-
-.wrapper__top {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    grid-column-gap: 8px;
-    grid-row-gap: 16px;
-}
 
 /* TODO: сделать грид сетку нормальной ширины */
 .calculation-option {
@@ -60,7 +89,7 @@ h1 {
 }
 
 .sum-credit-small {
-    grid-area: 2 / 3 / 2 / 5;
+    grid-area: 2 / 4 / 2 / 5;
 }
 
 .monthly-payment {
@@ -136,8 +165,46 @@ h1 {
     height: 44px;
 }
 
-.radio-wrapper label input:checked+span {
-    background-color: var(--color-L100);
-    border-radius: 8px;
-    box-shadow: 0 -2px 6px rgba(0, 0, 0, .02), 0 10px 14px rgba(20, 36, 56, .06);
+
+.accordeon {
+    margin: 30px 0;
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 12px;
+}
+
+.accordeon:hover {
+    cursor: pointer;
+}
+
+.accordeon__top {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.accordeon__top i {
+    position: absolute;
+    top: 18px;
+    right: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.accordeon__title {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    margin-left: 20px;
+}
+
+.accordeon__top span {
+    background-color: var(--color-G30);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    padding: 14px;
 }
