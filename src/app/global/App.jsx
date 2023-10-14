@@ -1,24 +1,139 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import "./styles/global.css";
+
 import { Input } from "../../components/Input/Input";
 import { RadioButton } from "../../components/RadioButton/RadioButton";
 import { Button } from "../../components/Button/Button";
+import { FinalCalc } from "../../components/FinalCalc/FinalCalc";
 import { Container } from "../../layout/Container/Container";
 
+import { changeTypeCalculation } from "../../store/reducers/typeCalculation";
+import {
+  changeMonthAmountOfCredit,
+  changeMonthProcent,
+  changeMonthCreditTerm,
+  changeMonthYearOrMonth,
+} from "../../store/reducers/calculationMonthlyPayment";
+import {
+  changeMaximumMonthlyPayment,
+  changeMaximumCreditTerm,
+  changeMaximumYearOrMonth,
+  changeMaximumProcent,
+} from "../../store/reducers/calculationMaximumLoanAmount";
+import {
+  changeTermMonthlyPayment,
+  changeTermAmountOfCredit,
+  changeTermProcent,
+} from "../../store/reducers/calculationLoanTerm";
+import { useSelector, useDispatch } from "react-redux";
+
 function App() {
-  const [typeCalc, setTypeCalc] = useState("monthly-payment");
-  const [selectedOption, setSelectedOption] = useState("annuity");
+  //выбор варианта рассчета сохранятся в редаксе
+  const dispatch = useDispatch();
+  const typeCalculation = useSelector(
+    (state) => state.typeCalc.calculationOption
+  );
+
+  const handleChangeTypeCalculation = (newOption) => {
+    dispatch(changeTypeCalculation(newOption));
+  };
+
+  //ФУНКЦИИ ДЛЯ MonthlyPayment
+  //Сумма кредита
+  const sumCreditMonthlyPayment = useSelector(
+    (state) => state.calcMonthlyPayment.amountOfCredit
+  );
+
+  const handleSumCreditMonthlyPayment = (e) => {
+    dispatch(changeMonthAmountOfCredit(e.target.value));
+  };
+  //Срок кредита
+  const termCreditMonthlyPayment = useSelector(
+    (state) => state.calcMonthlyPayment.creditTerm
+  );
+
+  const handleTermCreditMonthlyPayment = (e) => {
+    dispatch(changeMonthCreditTerm(e.target.value));
+  };
+
+  //Лет или месяцев
+  const handleYearOrMonthMonthlyPayment = (newOption) => {
+    dispatch(changeMonthYearOrMonth(newOption));
+  };
+  //Ставка
+  const procentCreditMonthlyPayment = useSelector(
+    (state) => state.calcMonthlyPayment.procent
+  );
+
+  const handleProcentCreditMonthlyPayment = (e) => {
+    dispatch(changeMonthProcent(e.target.value));
+  };
+
+  //ФУНКЦИИ ДЛЯ Calculation of the maximum loan amount
+  //Ежемесячный платёж
+  const sumMonthlyPayment = useSelector(
+    (state) => state.calcMaximumLoanAmount.monthlyPayment
+  );
+
+  const handleSumMonthlyPayment = (e) => {
+    dispatch(changeMaximumMonthlyPayment(e.target.value));
+  };
+
+  //Срок кредита
+  const termCreditMaximumPayment = useSelector(
+    (state) => state.calcMaximumLoanAmount.creditTerm
+  );
+
+  const handleTermCreditMaximumPayment = (e) => {
+    dispatch(changeMaximumCreditTerm(e.target.value));
+  };
+
+  //Лет или месяцев
+  const handleYearOrMonthMaximumPayment = (newOption) => {
+    dispatch(changeMaximumYearOrMonth(newOption));
+  };
+  //Ставка
+  const procentCreditMaximumPayment = useSelector(
+    (state) => state.calcMaximumLoanAmount.procent
+  );
+
+  const handleProcentCreditMaximumPayment = (e) => {
+    dispatch(changeMaximumProcent(e.target.value));
+  };
+
+  //ФУНКЦИИ для Loan term calculation / Расчет срока кредита
+  //Сумма кредита
+  const sumMonthlyPaymentTerm = useSelector(
+    (state) => state.calcLoanTerm.monthlyPayment
+  );
+
+  const handleSumMonthlyPaymentTerm = (e) => {
+    dispatch(changeTermMonthlyPayment(e.target.value));
+  };
+
+  //Ежемесячный платёж
+  const amountOfCreditTerm = useSelector(
+    (state) => state.calcLoanTerm.amountOfCredit
+  );
+
+  const handleAmountOfCreditTerm = (e) => {
+    dispatch(changeTermAmountOfCredit(e.target.value));
+  };
+
+  //Ставка
+  const procentCreditTerm = useSelector((state) => state.calcLoanTerm.procent);
+
+  const handleProcentCreditTerm = (e) => {
+    dispatch(changeTermProcent(e.target.value));
+  };
+
+  // TODO: пофиксить на второй клик должен быть перерасчет
   const [showTotal, setShowTotal] = useState(false);
   const [showList, setShowList] = useState(false);
 
+  const [selectedOption, setSelectedOption] = useState("annuity");
   const handleOptionChange = (e) => {
     setSelectedOption(e.target.value);
-  };
-
-  const calculation = (e) => {
-    e.preventDefault();
-    console.log("Кнопка была нажата");
-    setShowTotal(!showTotal);
   };
 
   const variantsOptions = [
@@ -47,10 +162,6 @@ function App() {
     },
   ];
 
-  useEffect(() => {
-    console.log(showTotal);
-  }, [showTotal]);
-
   return (
     <div className="App">
       <Container>
@@ -61,30 +172,37 @@ function App() {
               className="calculation-option"
               label="Вариант расчета"
               list={variantsOptions}
-              setFunction={setTypeCalc}
+              setFunction={handleChangeTypeCalculation}
             />
 
             {/* Расчет ежемесячного платежа */}
 
-            {typeCalc === "monthly-payment" && (
+            {typeCalculation === "monthly-payment" && (
               <>
                 <Input
                   className="sum-credit"
                   label="Сумма кредита"
-                  initValue="500000"
+                  value={sumCreditMonthlyPayment}
+                  onChange={handleSumCreditMonthlyPayment}
                   type="text"
                 />
                 <Input
                   className="credit-term-small"
                   label="Срок кредита"
-                  initValue="5"
+                  value={termCreditMonthlyPayment}
+                  onChange={handleTermCreditMonthlyPayment}
                   type="text"
                 />
-                <Input className="credit-term-list-small" list={termOptions} />
+                <Input
+                  className="credit-term-list-small"
+                  setFunction={handleYearOrMonthMonthlyPayment}
+                  list={termOptions}
+                />
                 <Input
                   className="count-procent-small"
                   label="Ставка"
-                  initValue="5"
+                  value={procentCreditMonthlyPayment}
+                  onChange={handleProcentCreditMonthlyPayment}
                   type="text"
                 />
                 <Input
@@ -95,11 +213,7 @@ function App() {
                 <div className="wrapper-bottom">
                   <div className="question">
                     Тип платежей{" "}
-                    <span
-                      data-qa="Icon"
-                      class="_17sy1wp _18zu2v3 _g18kgu shape-round"
-                      tabindex="0"
-                    >
+                    <span>
                       <svg
                         data-qa="Tooltip"
                         viewBox="0 0 20 20"
@@ -109,16 +223,16 @@ function App() {
                         <path
                           d="M10 17.25A7.25 7.25 0 0 1 2.75 10 7.25 7.25 0 0 1 10 2.75 7.25 7.25 0 0 1 17.25 10 7.25 7.25 0 0 1 10 17.25Z"
                           stroke="currentColor"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         ></path>
                         <path
                           d="M10 11.042v-.209c0-.68.42-1.05.842-1.333.412-.277.825-.64.825-1.306a1.666 1.666 0 1 0-3.334 0"
                           stroke="currentColor"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         ></path>
                         <path
                           d="M9.997 13a.75.75 0 1 0 .007 1.5.75.75 0 0 0-.007-1.5Z"
@@ -151,25 +265,33 @@ function App() {
 
             {/* Расчет максимальной суммы кредита */}
 
-            {typeCalc === "maximum-loan-amount" && (
+            {typeCalculation === "maximum-loan-amount" && (
               <>
                 <Input
                   className="monthly-payment"
                   label="Ежемесячный платеж"
-                  initValue="20000"
+                  value={sumMonthlyPayment}
+                  onChange={handleSumMonthlyPayment}
                   type="text"
                 />
                 <Input
                   className="credit-term-small"
                   label="Срок кредита"
-                  initValue="12"
+                  value={termCreditMaximumPayment}
+                  onChange={handleTermCreditMaximumPayment}
                   type="text"
                 />
-                <Input className="credit-term-list-small" list={termOptions} />
+                {/* TODO: НАЧАЛЬНОЕ ЗНАЧЕНИЕ СПИСКА */}
+                <Input
+                  className="credit-term-list-small"
+                  list={termOptions}
+                  setFunction={handleYearOrMonthMaximumPayment}
+                />
                 <Input
                   className="count-procent-small"
                   label="Ставка"
-                  initValue="10"
+                  value={procentCreditMaximumPayment}
+                  onChange={handleProcentCreditMaximumPayment}
                   type="text"
                 />
                 <Input
@@ -182,24 +304,27 @@ function App() {
 
             {/* Расчет срока кредита */}
 
-            {typeCalc === "credit-term" && (
+            {typeCalculation === "credit-term" && (
               <>
                 <Input
                   className="credit-term"
                   label="Сумма кредита"
-                  initValue="1000000"
+                  value={amountOfCreditTerm}
+                  onChange={handleAmountOfCreditTerm}
                   type="text"
                 />
                 <Input
                   className="monthly-payment-small"
                   label="Ежемесячный платеж"
-                  initValue="20000"
+                  value={sumMonthlyPaymentTerm}
+                  onChange={handleSumMonthlyPaymentTerm}
                   type="text"
                 />
                 <Input
                   className="count-procent-small-term"
                   label="Ставка"
-                  initValue="10"
+                  value={procentCreditTerm}
+                  onChange={handleProcentCreditTerm}
                   type="text"
                 />
                 <Input
@@ -212,7 +337,12 @@ function App() {
           </div>
           <div className="calculation">
             {showTotal ? (
-              <div>рассчёт</div>
+              <FinalCalc
+                title="Максимальная сумма кредита"
+                count="227 490,17"
+                procent="12 509,83"
+                total="240 000,00"
+              />
             ) : (
               <div className="calculation__picture">
                 <svg
@@ -412,7 +542,11 @@ function App() {
               </div>
             )}
 
-            <Button text="Рассчитать" onClick={calculation} />
+            <Button
+              className="calculation__button"
+              text="Рассчитать"
+              // onClick={calculation}
+            />
           </div>
         </form>
         {showTotal && (
@@ -437,7 +571,7 @@ function App() {
                     height="13.5"
                     rx="1.25"
                     stroke="currentColor"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                   ></rect>
                   <rect
                     x="2"
@@ -483,9 +617,9 @@ function App() {
                   <path
                     d="m4 7 6 6 6-6"
                     stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   ></path>
                 </svg>
               </i>

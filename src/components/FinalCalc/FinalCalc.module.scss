@@ -1,0 +1,32 @@
+.final {
+    &__title {
+        color: var(--color-D60);
+        margin-bottom: 5px;
+    }
+
+    &__count {
+        display: block;
+        margin-top: 4px;
+        color: var(--color-D80);
+        font-size: 22px;
+        line-height: 26px;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+
+    &__row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+
+        & span:nth-child(odd) {
+            color: var(--color-D60);
+
+        }
+
+        & span:nth-child(even) {
+            color: var(--color-D100);
+
+        }
+    }
+}

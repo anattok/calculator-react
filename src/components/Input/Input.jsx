@@ -4,16 +4,24 @@ import s from "./Input.module.scss";
 export const Input = ({
   label,
   list,
-  initValue,
+  value,
   type,
   className,
   setFunction,
+  onChange,
 }) => {
   const [listOpen, isListOpen] = useState(false); // открытие/закрытие списка
-  const [inputValue, setInputValue] = useState(initValue);
+  const [inputValue, setInputValue] = useState(value);
+
+  // TODO: переписать чтобы объекты со свойствами листа хранились в компоненте
   const [selectedItem, setSelectedItem] = useState(list && list[0].text);
   const inputClassNames = [s.input, className].join(" ");
   const inputRef = useRef(null);
+
+  // Эффект для обновления inputValue при изменении value
+  useEffect(() => {
+    setInputValue(value);
+  }, [value]);
 
   //закрываем список по клику вне списка
   useEffect(() => {
@@ -49,10 +57,6 @@ export const Input = ({
       </ul>
     ) : null;
 
-  useEffect(() => {
-    console.log(list && list[0].text);
-  }, [list]);
-
   return (
     <label
       ref={inputRef}
@@ -81,20 +85,19 @@ export const Input = ({
               <path
                 d="m4 7 6 6 6-6"
                 stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               ></path>
             </svg>
           </i>
-
           {renderedList}
         </>
       ) : (
         <input
           type={type === "date" ? "date" : type}
           value={inputValue}
-          onChange={(event) => setInputValue(event.target.value)}
+          onChange={onChange}
         />
       )}
     </label>
