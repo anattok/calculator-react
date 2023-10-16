@@ -9,7 +9,6 @@
     cursor: text;
     font-size: 16px;
     min-width: 100%;
-    overflow: hidden;
 
     &:hover {
         border-color: var(--color-D20);
@@ -91,7 +90,6 @@
         background-color: var(--color-D10);
     }
 }
-
 
 .count {
     min-width: 100%;

@@ -1,6 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import s from "./Input.module.scss";
 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import ru from "date-fns/locale/ru";
+import { registerLocale, setDefaultLocale } from "react-datepicker";
+registerLocale("ru", ru);
+setDefaultLocale("RU");
+
 export const Input = ({
   label,
   list,
@@ -11,18 +18,13 @@ export const Input = ({
   onChange,
 }) => {
   const [listOpen, isListOpen] = useState(false); // открытие/закрытие списка
-  // const [inputValue, setInputValue] = useState(value);
 
   // TODO: переписать чтобы объекты со свойствами листа хранились в компоненте
   const [selectedItem, setSelectedItem] = useState(list && list[0].text);
   const inputClassNames = [s.input, className].join(" ");
   const inputRef = useRef(null);
 
-  // // Эффект для обновления inputValue при изменении value
-  // useEffect(() => {
-  //   setInputValue(value);
-  //   console.log(value);
-  // }, [value]);
+  const [startDate, setStartDate] = useState(new Date());
 
   //закрываем список по клику вне списка
   useEffect(() => {
@@ -104,11 +106,22 @@ export const Input = ({
               {value && label === "Ежемесячный платеж" && "₽"}
             </span>
           </div>
-          <input
-            type={type === "date" ? "date" : type}
-            onChange={onChange}
-            value={value}
-          />
+          {type === "date" ? (
+            <DatePicker
+              locale="ru"
+              className={s.calendar}
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              dateFormat="dd.MM.yyyy"
+              onChangeRaw={(e) => e.preventDefault()}
+            />
+          ) : (
+            <input
+              type={type === "date" ? "date" : type}
+              onChange={onChange}
+              value={value}
+            />
+          )}
         </>
       )}
     </label>

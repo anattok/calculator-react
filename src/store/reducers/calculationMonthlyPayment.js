@@ -5,6 +5,7 @@ const initialState = {
     procent: '10',
     creditTerm: '5',
     yearOrMonth: "year",
+    startDate: new Date()
 }
 
 export const calculationMonthlyPaymentSlice = createSlice({
@@ -24,9 +25,12 @@ export const calculationMonthlyPaymentSlice = createSlice({
         changeMonthYearOrMonth: (state, action) => {
             state.yearOrMonth = action.payload
         },
+        changeMonthStartDate: (state, action) => {
+            state.startDate = action.payload
+        },
 
     },
 })
 
-export const { changeMonthAmountOfCredit, changeMonthProcent, changeMonthCreditTerm, changeMonthYearOrMonth } = calculationMonthlyPaymentSlice.actions
+export const { changeMonthAmountOfCredit, changeMonthProcent, changeMonthCreditTerm, changeMonthYearOrMonth, changeMonthStartDate } = calculationMonthlyPaymentSlice.actions
 export default calculationMonthlyPaymentSlice

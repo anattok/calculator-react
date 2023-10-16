@@ -16,6 +16,7 @@ import {
   changeMonthProcent,
   changeMonthCreditTerm,
   changeMonthYearOrMonth,
+  changeMonthStartDate,
 } from "../../store/reducers/calculationMonthlyPayment";
 import {
   changeMaximumMonthlyPayment,
@@ -73,6 +74,13 @@ function App() {
 
   const handleProcentCreditMonthlyPayment = (e) => {
     dispatch(changeMonthProcent(e.target.value));
+  };
+
+  //дата
+  const monthDate = useSelector((state) => state.calcMonthlyPayment.startDate);
+
+  const handleMonthDate = (e) => {
+    dispatch(changeMonthStartDate(e.target.value));
   };
 
   //ануитентный или дифференцированный
@@ -217,6 +225,7 @@ function App() {
                   label="Начало выплат"
                   type="date"
                 />
+
                 <div className="wrapper-bottom">
                   <div className="question">
                     Тип платежей{" "}
