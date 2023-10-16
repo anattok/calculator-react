@@ -7,19 +7,15 @@
     position: relative;
     transition: all 0.2s;
     cursor: text;
+    font-size: 16px;
+    min-width: 100%;
+    overflow: hidden;
 
     &:hover {
         border-color: var(--color-D20);
     }
 
-    & span {
-        position: absolute;
-        top: 8px;
-        left: 16px;
-        font-size: 12px;
-        opacity: 0.5;
-        pointer-events: none;
-    }
+
 
     & p {
         font-size: 16px;
@@ -55,11 +51,20 @@
     }
 }
 
+.label {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+    font-size: 12px;
+    opacity: 0.5;
+    pointer-events: none;
+
+}
 
 .list {
     position: absolute;
     width: 100%;
-    top: 60px;
+    top: 65px;
     left: 0px;
     padding: 8px;
     border-radius: 12px;
@@ -67,6 +72,8 @@
     box-shadow: 0 12px 16px rgba(0, 0, 0, .2);
     transition: all 0.3s;
     z-index: 10;
+    // opacity: 0;
+    // transition: opacity 0.3s ease;
 
     & li {
         padding: 12px 16px;
@@ -82,5 +89,19 @@
 
     & li:hover {
         background-color: var(--color-D10);
+    }
+}
+
+
+.count {
+    min-width: 100%;
+    color: transparent;
+    position: absolute;
+    font-size: 16px;
+    top: 28px;
+    left: 16px;
+
+    span {
+        color: black;
     }
 }

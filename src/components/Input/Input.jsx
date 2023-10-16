@@ -11,17 +11,18 @@ export const Input = ({
   onChange,
 }) => {
   const [listOpen, isListOpen] = useState(false); // открытие/закрытие списка
-  const [inputValue, setInputValue] = useState(value);
+  // const [inputValue, setInputValue] = useState(value);
 
   // TODO: переписать чтобы объекты со свойствами листа хранились в компоненте
   const [selectedItem, setSelectedItem] = useState(list && list[0].text);
   const inputClassNames = [s.input, className].join(" ");
   const inputRef = useRef(null);
 
-  // Эффект для обновления inputValue при изменении value
-  useEffect(() => {
-    setInputValue(value);
-  }, [value]);
+  // // Эффект для обновления inputValue при изменении value
+  // useEffect(() => {
+  //   setInputValue(value);
+  //   console.log(value);
+  // }, [value]);
 
   //закрываем список по клику вне списка
   useEffect(() => {
@@ -64,7 +65,7 @@ export const Input = ({
       className={inputClassNames}
       onClick={() => isListOpen(!listOpen)}
     >
-      {label && <span>{label}</span>}
+      {label && <span className={s.label}>{label}</span>}
       {list ? (
         <>
           <p>{selectedItem}</p>
@@ -94,11 +95,21 @@ export const Input = ({
           {renderedList}
         </>
       ) : (
-        <input
-          type={type === "date" ? "date" : type}
-          value={inputValue}
-          onChange={onChange}
-        />
+        <>
+          <div className={s.count}>
+            {value}
+            <span>
+              {value && label === "Ставка" && "%"}
+              {value && label === "Сумма кредита" && "₽"}
+              {value && label === "Ежемесячный платеж" && "₽"}
+            </span>
+          </div>
+          <input
+            type={type === "date" ? "date" : type}
+            onChange={onChange}
+            value={value}
+          />
+        </>
       )}
     </label>
   );
