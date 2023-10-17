@@ -5,6 +5,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ru from "date-fns/locale/ru";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
+
+import { useSelector, useDispatch } from "react-redux";
+import { setDate } from "../../store/reducers/datePickerReducer";
+
 registerLocale("ru", ru);
 setDefaultLocale("RU");
 
@@ -16,6 +20,7 @@ export const Input = ({
   className,
   setFunction,
   onChange,
+  selected,
 }) => {
   const [listOpen, isListOpen] = useState(false); // открытие/закрытие списка
 
@@ -23,8 +28,6 @@ export const Input = ({
   const [selectedItem, setSelectedItem] = useState(list && list[0].text);
   const inputClassNames = [s.input, className].join(" ");
   const inputRef = useRef(null);
-
-  const [startDate, setStartDate] = useState(new Date());
 
   //закрываем список по клику вне списка
   useEffect(() => {
@@ -110,8 +113,8 @@ export const Input = ({
             <DatePicker
               locale="ru"
               className={s.calendar}
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
+              selected={selected}
+              onChange={onChange}
               dateFormat="dd.MM.yyyy"
               onChangeRaw={(e) => e.preventDefault()}
             />

@@ -19,4 +19,4 @@ export const typeCalculationSlice = createSlice({
 })
 
 export const { changeTypeCalculation } = typeCalculationSlice.actions
-export default typeCalculationSlice
+export default typeCalculationSlice;

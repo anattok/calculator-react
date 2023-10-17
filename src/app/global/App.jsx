@@ -29,6 +29,7 @@ import {
   changeTermAmountOfCredit,
   changeTermProcent,
 } from "../../store/reducers/calculationLoanTerm";
+import { setDate } from "../../store/reducers/datePickerReducer";
 import { useSelector, useDispatch } from "react-redux";
 
 function App() {
@@ -74,13 +75,6 @@ function App() {
 
   const handleProcentCreditMonthlyPayment = (e) => {
     dispatch(changeMonthProcent(e.target.value));
-  };
-
-  //дата
-  const monthDate = useSelector((state) => state.calcMonthlyPayment.startDate);
-
-  const handleMonthDate = (e) => {
-    dispatch(changeMonthStartDate(e.target.value));
   };
 
   //ануитентный или дифференцированный
@@ -147,6 +141,12 @@ function App() {
     dispatch(changeTermProcent(e.target.value));
   };
 
+  //Старт дата
+  const selectedDate = useSelector((state) => state.datePicker.startDate);
+
+  const handleDateChange = (date) => {
+    dispatch(setDate(date.toISOString()));
+  };
   // TODO: пофиксить на второй клик должен быть перерасчет
   //функция рассчета
   const [showTotal, setShowTotal] = useState(false);
@@ -159,7 +159,7 @@ function App() {
         termCreditMonthlyPayment,
         yearOrMonthMonthlyPayment,
         procentCreditMonthlyPayment,
-        "15-10-2023",
+        selectedDate,
         selectedOption
       );
     }
@@ -172,7 +172,7 @@ function App() {
       termCreditMonthlyPayment,
       yearOrMonthMonthlyPayment,
       procentCreditMonthlyPayment,
-      "15-10-2023",
+      selectedDate,
       selectedOption
     );
   }, [selectedOption]);
@@ -224,6 +224,8 @@ function App() {
                   className="start-date-small"
                   label="Начало выплат"
                   type="date"
+                  onChange={handleDateChange}
+                  selected={selectedDate}
                 />
 
                 <div className="wrapper-bottom">
@@ -314,6 +316,8 @@ function App() {
                   className="start-date-small"
                   label="Начало выплат"
                   type="date"
+                  onChange={handleDateChange}
+                  selected={selectedDate}
                 />
               </>
             )}
@@ -347,6 +351,8 @@ function App() {
                   className="start-date-small-term"
                   label="Начало выплат"
                   type="date"
+                  onChange={handleDateChange}
+                  selected={selectedDate}
                 />
               </>
             )}
